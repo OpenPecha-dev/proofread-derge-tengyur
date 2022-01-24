@@ -1,4 +1,4 @@
-name: update catalog every sunday
+name: update the proofread hfml
 
 on:
   push
@@ -34,14 +34,14 @@ jobs:
             return vol_text
 
         if __name__ == "__main__":
-            os.system('ls')
             home_path = Path.home()
             repo_path = home_path / "runner/work/proofread-derge-tengyur/proofread-derge-tengyur"
-            # vol_paths = list((repo_path / 'esukhia_tengyur/').iterdir())
-            # vol_paths.sort()
-            # for vol_path in vol_paths:
-            #     vol_text = get_vol_text(vol_path)
-            #     (repo_path / f'proofread_tengyur_hfml/{vol_path.stem}.txt').write_text(vol_text, encoding='utf-8')
+            vol_paths = list((repo_path / 'esukhia_tengyur/').iterdir())
+            vol_paths.sort()
+            for vol_path in vol_paths:
+                vol_text = get_vol_text(vol_path)
+                (repo_path / f'proofread_tengyur_hfml/{vol_path.stem}.txt').write_text(vol_text, encoding='utf-8')
+                print(f'{vol_path.stem} completed')
       shell: python
     
     - name: Commit changes
