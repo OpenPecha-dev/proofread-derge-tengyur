@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        path: '/proofread-derge-tengyur/'
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
