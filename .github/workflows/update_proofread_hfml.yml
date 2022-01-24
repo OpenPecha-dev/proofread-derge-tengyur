@@ -43,9 +43,9 @@ jobs:
       shell: python
     
     - name: Commit changes
-        uses: EndBug/add-and-commit@v8
-        with:
-          author_name: kaldan007
-          author_email: kaldantenzin@gmail.com
-          message: 'proofread hfml updated'
-          add: '*'
+      uses: EndBug/add-and-commit@v8
+      with:
+        author_name: kaldan007
+        author_email: kaldantenzin@gmail.com
+        message: 'proofread hfml updated'
+        add: '*'
