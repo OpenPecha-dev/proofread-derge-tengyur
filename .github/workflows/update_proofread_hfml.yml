@@ -19,6 +19,7 @@ jobs:
         
     - name: Update the proofread hfml
       run: |
+        import os
         from pathlib import Path
 
         def get_vol_text(vol_path):
@@ -33,6 +34,8 @@ jobs:
             return vol_text
 
         if __name__ == "__main__":
+            os.system('pwd')
+            home_path = Path.home()
             vol_paths = list(Path('./proofread-derge-tengyur/esukhia_tengyur/').iterdir())
             vol_paths.sort()
             for vol_path in vol_paths:
