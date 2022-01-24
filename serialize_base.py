@@ -6,7 +6,7 @@ COMMIT_MESSAGE = 'proofread hfml updated'
 
 def git_pull():
     repo = Repo(PATH_OF_GIT_REPO)
-    origin = repo.remote(name='origin')
+    origin = repo.remotes.origin
     origin.pull()
 
 def git_push():
@@ -14,7 +14,7 @@ def git_push():
         repo = Repo(PATH_OF_GIT_REPO)
         repo.git.add(update=True)
         repo.index.commit(COMMIT_MESSAGE)
-        origin = repo.remote(name='origin')
+        origin = repo.remotes.origin
         origin.push()
     except:
         print('Some error occured while pushing the code')
