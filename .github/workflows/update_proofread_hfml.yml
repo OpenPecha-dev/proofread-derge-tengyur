@@ -6,7 +6,7 @@ on:
     
 jobs:
   build:
-    name: Update the catalog.csv
+    name: Update the proofread hfml
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -17,9 +17,7 @@ jobs:
     - name: Install dependencies
       run: 'python -m pip install --upgrade pip pip install regex PyYAML python-csv requests PyGithub pathlib GitPython '
         
-    - name: Update the catalog.csv
-      env:
-        SECRET: ${{ secrets.GITHUB_TOKEN }}
+    - name: Update the proofread hfml
       run: |
         from pathlib import Path
         from git import Repo
@@ -27,12 +25,17 @@ jobs:
         PATH_OF_GIT_REPO = r'./.git'  # make sure .git folder is properly configured
         COMMIT_MESSAGE = 'proofread hfml updated'
 
+        def git_pull():
+            repo = Repo(PATH_OF_GIT_REPO)
+            origin = repo.remotes.origin
+            origin.pull()
+
         def git_push():
             try:
                 repo = Repo(PATH_OF_GIT_REPO)
                 repo.git.add(update=True)
                 repo.index.commit(COMMIT_MESSAGE)
-                origin = repo.remote(name='origin')
+                origin = repo.remotes.origin
                 origin.push()
             except:
                 print('Some error occured while pushing the code')
@@ -48,16 +51,8 @@ jobs:
                     vol_text += f'〔{page_num}〕\n{page_content}\n'
             return vol_text
 
-        def update_repo(g, commit_msg, new_content):
-            try:
-                repo = g.get_repo(f"Openpecha/catalog")
-                contents = repo.get_contents(f"./data/catalog.csv", ref="main")
-                repo.update_file(contents.path, commit_msg , new_content, contents.sha, branch="main")
-                print(f'catalog update completed..')
-            except:
-                print('Repo not found')
-
         if __name__ == "__main__":
+            git_pull()
             vol_paths = list(Path('./esukhia_tengyur/').iterdir())
             vol_paths.sort()
             for vol_path in vol_paths:
