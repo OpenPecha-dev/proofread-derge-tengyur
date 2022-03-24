@@ -31,10 +31,8 @@ def get_vol_text(vol_path):
     return vol_text
 
 if __name__ == "__main__":
-    git_pull()
-    # vol_paths = list(Path('./esukhia_tengyur/').iterdir())
-    # vol_paths.sort()
-    # for vol_path in vol_paths:
-        # vol_text = get_vol_text(vol_path)
-        # Path(f'./proofread_tengyur_hfml/{vol_path.stem}.txt').write_text(vol_text, encoding='utf-8')
-    git_push()
+    vol_paths = list(Path('./esukhia_tengyur/').iterdir())
+    vol_paths.sort()
+    for vol_path in vol_paths:
+        vol_text = get_vol_text(vol_path)
+        Path(f'./proofread_tengyur_hfml/{vol_path.stem}.txt').write_text(vol_text, encoding='utf-8')
