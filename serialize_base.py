@@ -31,7 +31,7 @@ def get_vol_text(vol_path):
     return vol_text
 
 if __name__ == "__main__":
-    vol_paths = list(Path('./esukhia_tengyur/').iterdir())
+    vol_paths = list(Path('./versions/esukhia_tengyur/').iterdir())
     vol_paths.sort()
     for vol_path in vol_paths:
         vol_text = get_vol_text(vol_path)
